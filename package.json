@@ -1,0 +1,27 @@
+{
+  "name": "week-18-scrapped",
+  "version": "1.0.0",
+  "description": "Homework practice for Mongoose and MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MagentaReds/week-18-scrapped.git"
+  },
+  "keywords": [
+    "homework",
+    "mongodb",
+    "mongoose",
+    "experss",
+    "cheerio",
+    "handlebars"
+  ],
+  "author": "Grant Daniels",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MagentaReds/week-18-scrapped/issues"
+  },
+  "homepage": "https://github.com/MagentaReds/week-18-scrapped#readme"
+}
