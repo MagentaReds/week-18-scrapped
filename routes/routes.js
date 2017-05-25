@@ -23,13 +23,15 @@ router.get("/saved", function(req, res){
     .exec(function(err, results){
       if(err)
         return res.send(err);
-      res.render("savedArticles", {articles: results});
+      //res.json(results);
+      res.render("savedArticles", {results: results});
     });
 });
 
 router.post("/saveArticle", function(req, res){
   var _id= req.body.id;
-  SavedArticle.save({article: _id}, function(err, result){
+  var newDoc = new SavedArticle({article: _id});
+  newDoc.save(function(err, result){
     if(err){
       res.json({err: true, msg: "Article is already saved to saved list"});
     } else {

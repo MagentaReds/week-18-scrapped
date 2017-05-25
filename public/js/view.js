@@ -22,7 +22,7 @@ $(document).ready(function(){
     var id=$(this).attr("data-id");
     $.post("/saveArticle", {id: id}, function(data){
       if(data.err)
-        displayModal("Unsuccess!", err.msg);
+        displayModal("Unsuccess!", data.msg);
       else
         displayModal("Success!", "Article saved to saved list!");
     });
