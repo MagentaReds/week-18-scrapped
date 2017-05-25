@@ -1,0 +1,14 @@
+<div class="container">
+  <button class="scrape btn btn-success">Get New Articles!</button>
+  <br><br>
+  {{#each articles}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><a href="{{this.link}}">{{this.title}}</a></h3>
+      </div>
+      <div class="panel-body">
+        {{this.summary}}
+      </div>
+    </div>
+  {{/each}}
+</div>
