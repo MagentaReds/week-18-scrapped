@@ -9,7 +9,7 @@ mongoose.Promise = Promise;
 if(process.env.NODE_ENV==="production"){
   mongoose.connect(process.env.MONGODB_URI);
 } else  {
-  mongoose.connect("mongodb://localhost/week18Populater");
+  mongoose.connect("mongodb://localhost/week18HW");
 }
 var db = mongoose.connection;
 

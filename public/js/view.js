@@ -1,9 +1,10 @@
-$(document).on("ready", function(event){
+$(document).ready(function(){
 
   $(".scrape").on("click", function(event){
-    event.preventDefualt();
+    event.preventDefault();
     $.get("/scrape", function(data){
       console.log("Scrappe Successful");
+      console.log(data.articlesAdded+" Articles Added!");
     });  
   });
 

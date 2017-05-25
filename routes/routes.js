@@ -21,6 +21,8 @@ router.get("/scrape", function(req, res){
     // Load the html body from request into cheerio
     var $ = cheerio.load(html);
 
+    var articleArray = [];
+
     $("article[role='article']").each(function(i, element){
       var input = {};
       var importantThing = $(this).find("h2.headline");
@@ -29,17 +31,40 @@ router.get("/scrape", function(req, res){
       importantThing = $(this).find("div.desc");
       input.summary = importantThing.text().trim();
 
-      var newArticle = new Article(input);
-      newArticle.save(function(err, result){
-        if(err)
-          console.log(err);
-        else
-          console.log(result);
-      });
+      articleArray.push(input);
+
+      // var newArticle = new Article(input);
+      // newArticle.save(function(err, result){
+      //   if(err)
+      //     console.log(err);
+      //   console.log("Successfully Inserted");
+      // });
 
     });
 
-    res.sendStatus(204);
+    // //var newArticle = new Article(input);
+    // try {
+    //   Article.insertMany(articleArray, {ordered: false}, function(err, results) {
+    //     if(err) {
+    //       console.log("Err");
+    //     } else
+    //       console.log(results.length);
+    //   });
+    // } catch(e) {
+    //   print(e);
+    // }
+
+    
+    Article.insertMany(articleArray, {ordered: false})
+    .then(function(results) {
+      //console.log(results.length);
+      res.json({articlesAdded: results.length});
+    }, function(err){
+      //console.log(err);
+      res.json({articlesAdded: (articleArray.length-err.writeErrors.length)});
+    });
+  
+    
   });
 });
 
