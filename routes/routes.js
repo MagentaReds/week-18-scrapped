@@ -18,11 +18,13 @@ router.get("/", function(req, res){
 
 
 router.get("/saved", function(req, res){
-  SavedArticle.find({}, function(err, results){
-    if(err)
-      return res.send(err);
-    res.render("savedArticles", {articles: results});
-  });
+  SavedArticle.find({})
+    .populate("article")
+    .exec(function(err, results){
+      if(err)
+        return res.send(err);
+      res.render("savedArticles", {articles: results});
+    });
 });
 
 router.post("/saveArticle", function(req, res){
