@@ -1,5 +1,21 @@
 <div class="container">
-  Hello
+  {{#each articles}}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><a href="{{this.link}}">{{this.title}}</a></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-9">
+            {{this.summary}}
+          </div>
+          <div class="col-md-3">
+            <button class="saveArticle btn btn-success text-center" data-id="{{this._id}}">Save Article</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
 </div>
 
 
