@@ -23,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/MagentaReds/week-18-scrapped/issues"
   },
-  "homepage": "https://github.com/MagentaReds/week-18-scrapped#readme"
+  "homepage": "https://github.com/MagentaReds/week-18-scrapped#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^0.22.0",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.10.2",
+    "request": "^2.81.0"
+  }
 }
