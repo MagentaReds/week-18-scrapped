@@ -5,7 +5,8 @@ var SavedArticleSchema = new Schema({
   article: {
     type: Schema.Types.ObjectId,
     ref: "Article",
-    required: true
+    required: true,
+    unique: true
   },
   notes: [{
     type: Schema.Types.ObjectId,
