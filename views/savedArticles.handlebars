@@ -1,16 +1,16 @@
 <div class="container">
-  {{#each articles}}
+  {{#each results}}
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title"><a href="{{this.link}}">{{this.title}}</a></h3>
+        <h3 class="panel-title"><a href="{{this.article.link}}">{{this.article.title}}</a></h3>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class="col-md-9">
-            {{this.summary}}
+            {{this.article.summary}}
           </div>
-          <div class="col-md-3">
-            <button class="saveArticle btn btn-success text-center" data-id="{{this._id}}">Save Article</button>
+          <div class="col-md-3 text-center">
+            <button class="seeNotes btn btn-success" data-id="{{this._id}}">See notes</button>
           </div>
         </div>
       </div>
