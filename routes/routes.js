@@ -40,6 +40,17 @@ router.post("/saveArticle", function(req, res){
   });
 });
 
+router.delete("/saveArticle", function(req, res){
+  var _id= req.body.id;
+  SavedArticle.remove({_id: _id}, function(err, result){
+    if(err){
+      res.json({err: true, msg: "thing failed"});
+    } else {
+      res.json({success: true});
+    }
+  });
+});
+
 router.get("/scrape", function(req, res){
   request("http://www.theonion.com/", function(error, response, html) {
     // Load the html body from request into cheerio

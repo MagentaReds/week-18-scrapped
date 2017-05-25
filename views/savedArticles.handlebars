@@ -1,6 +1,6 @@
 <div class="container">
   {{#each results}}
-    <div class="panel panel-default">
+    <div class="panel panel-default" id="{{this._id}}">
       <div class="panel-heading">
         <h3 class="panel-title"><a href="{{this.article.link}}">{{this.article.title}}</a></h3>
       </div>
@@ -11,6 +11,7 @@
           </div>
           <div class="col-md-3 text-center">
             <button class="seeNotes btn btn-success" data-id="{{this._id}}">See notes</button>
+            <button class="unsave btn btn-Danger" data-id="{{this._id}}">Unsave</button>
           </div>
         </div>
       </div>

@@ -28,4 +28,21 @@ $(document).ready(function(){
     });
   });
 
+  $(".unsave").on("click", function(event){
+    var id=$(this).attr("data-id");
+    $.ajax({
+      url: '/saveArticle',
+      data: {id:id},
+      type: 'DELETE',
+      success: function(data) {
+        if(data.err)
+          displayModal("Unsuccess!", data.msg);
+        else {
+          $("#"+id).hide();
+          displayModal("Success!", "Article has been removed from saved list!");
+        }
+      }
+    });
+  });
+
 });
