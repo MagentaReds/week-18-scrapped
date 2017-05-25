@@ -11,8 +11,28 @@ var SavedArticle = require("../models/SavedArticle.js");
 router.get("/", function(req, res){
   Article.find({}, function(err, results){
     if(err)
-      res.send(err);
+      return res.send(err);
     res.render("index", {articles: results});
+  });
+});
+
+
+router.get("/saved", function(req, res){
+  SavedArticle.find({}, function(err, results){
+    if(err)
+      return res.send(err);
+    res.render("savedArticles", {articles: results});
+  });
+});
+
+router.post("/saveArticle", function(req, res){
+  var _id= req.body.id;
+  SavedArticle.save({article: _id}, function(err, result){
+    if(err){
+      res.json({err: true, msg: "Article is already saved to saved list"});
+    } else {
+      res.json({success: true});
+    }
   });
 });
 

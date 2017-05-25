@@ -1,5 +1,6 @@
 <div class="container">
-  <button class="scrape btn btn-success">Get New Articles!</button>
+  <button class="scrape btn btn-danger">Get New Articles!</button>
+  <button class="savedArticles btn btn-success">See Saved Articles!</button>
   <br><br>
   {{#each articles}}
     <div class="panel panel-default">
@@ -7,8 +8,30 @@
         <h3 class="panel-title"><a href="{{this.link}}">{{this.title}}</a></h3>
       </div>
       <div class="panel-body">
-        {{this.summary}}
+        <div class="row">
+          <div class="col-md-9">
+            {{this.summary}}
+          </div>
+          <div class="col-md-3">
+            <button class="saveArticle btn btn-success text-center" data-id="{{this._id}}">Save Article</button>
+          </div>
+        </div>
       </div>
     </div>
   {{/each}}
 </div>
+
+<!-- How Display Modal -->
+<div class="modal fade" id="displayModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title text-center"><span class="title"></span></h2>
+      </div>
+      <div class="modal-body">
+        <h4 class="text-center body"></h4>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
