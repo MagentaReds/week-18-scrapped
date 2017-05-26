@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+  //helper function for displaying and altering the modal
   function displayModal(title, body) {
     var modal = $("#displayModal");
     modal.find(".title").text(title);
@@ -7,13 +8,18 @@ $(document).ready(function(){
     modal.modal("show");
   }
 
+  //button to scrape the onion to get articles
   $(".scrape").on("click", function(event){
     event.preventDefault();
     $.get("/scrape", function(data){
       displayModal("Scrape succeeded", data.articlesAdded + " new Articles Added!");
+      $('#displayModal').one('hidden.bs.modal', function () {
+        window.location.reload();
+      });
     });  
   });
 
+  //button to go to saved article page
   $(".savedArticles").on("click", function(event){
     window.location = "/saved"
   });
@@ -22,6 +28,17 @@ $(document).ready(function(){
     window.location = "/"
   });
 
+  //button to perform DATA GEONOCIDE to get back to a clean starting state in MonogoDB
+  $(".purgeDatabase").on("click", function(event){
+    $.get("/purgeDatabase", function(data){
+      displayModal("Success!", "The Entire Database has been removed");
+      $('#displayModal').one('hidden.bs.modal', function () {
+        window.location.reload();
+      });
+    });
+  });
+
+  //button that saves the article to the saved article list.
   $(".saveArticle").on("click", function(event){
     var id=$(this).attr("data-id");
     $.post("/saveArticle", {id: id}, function(data){
@@ -32,6 +49,7 @@ $(document).ready(function(){
     });
   });
 
+  //unsaves the article
   $(".unsave").on("click", function(event){
     var id=$(this).attr("data-id");
     $.ajax({
@@ -61,7 +79,7 @@ $(document).ready(function(){
             </div>
           </div>
           -->*/
-
+  //help function to displaying notes
   function insertNote(body, noteId, savedArticleId){
     var panel = $("<div>");
     panel.addClass("panel panel-default");
@@ -90,6 +108,7 @@ $(document).ready(function(){
     $(".note-container").append(panel);
   }
 
+  //button that displayus the notes modal on the saved article page
   $(".seeNotes").on("click", function(event){
     var savedArticleId=$(this).attr("data-id");
     var modal = $("#notesModal");
@@ -110,6 +129,7 @@ $(document).ready(function(){
     });
   });
 
+  //save the text box into a new note.
   $(".save-note").on("click", function(event){
     var savedArticleId = $(this).attr("data-id-savedArticle");
     var body = $(".note-input").val().trim();
@@ -126,6 +146,7 @@ $(document).ready(function(){
     });
   });
 
+  //listener to see when a note is being deleted
   $(document).on("click", ".delete-note", function(event){
     var noteId = $(this).attr("data-id-note");
     var savedArticleId = $(this).attr("data-id-savedArticle");

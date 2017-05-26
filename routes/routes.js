@@ -8,6 +8,9 @@ var Note = require("../models/Note.js");
 var Article = require("../models/Article.js");
 var SavedArticle = require("../models/SavedArticle.js");
 
+
+//Get HTML Routes using Handlebars to render the pages.
+//======================
 router.get("/", function(req, res){
   Article.find({}, function(err, results){
     if(err)
@@ -28,6 +31,11 @@ router.get("/saved", function(req, res){
     });
 });
 
+//======================
+
+
+//Article API Routes
+//============================================
 router.post("/saveArticle", function(req, res){
   var _id= req.body.id;
   var newDoc = new SavedArticle({article: _id});
@@ -50,7 +58,11 @@ router.delete("/saveArticle", function(req, res){
     }
   });
 });
+//============================================
 
+
+//Note API Routes
+//============================================
 router.get("/notes/:id", function(req, res){
   var id=req.params.id;
   SavedArticle.findById(id)
@@ -98,7 +110,10 @@ router.delete("/notes", function(req, res){
     });
   });
 });
+//============================================
 
+//Api'ish route to tell my site to scrape The Onion using Cheerio
+//============================================
 router.get("/scrape", function(req, res){
   request("http://www.theonion.com/", function(error, response, html) {
     // Load the html body from request into cheerio
@@ -116,28 +131,8 @@ router.get("/scrape", function(req, res){
 
       articleArray.push(input);
 
-      // var newArticle = new Article(input);
-      // newArticle.save(function(err, result){
-      //   if(err)
-      //     console.log(err);
-      //   console.log("Successfully Inserted");
-      // });
-
     });
 
-    // //var newArticle = new Article(input);
-    // try {
-    //   Article.insertMany(articleArray, {ordered: false}, function(err, results) {
-    //     if(err) {
-    //       console.log("Err");
-    //     } else
-    //       console.log(results.length);
-    //   });
-    // } catch(e) {
-    //   print(e);
-    // }
-
-    
     Article.insertMany(articleArray, {ordered: false})
     .then(function(results) {
       //console.log(results.length);
@@ -150,5 +145,16 @@ router.get("/scrape", function(req, res){
     
   });
 });
+//============================================
+
+//Misc Testing Route
+//============================================
+router.get("/purgeDatabase", function(req, res){
+  SavedArticle.remove({}, function(){});
+  Note.remove({}, function(){});
+  Article.remove({}, function(){});
+  res.sendStatus(204);
+});
+//============================================
 
 module.exports = router;
