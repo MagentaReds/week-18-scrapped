@@ -1,0 +1,25 @@
+.flexBoxy{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+textarea.note-input {
+  height: 100px;
+  width: 100%;
+}
+
+body {
+  background-color: #E29A16;
+}
+
+.mainTitle {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 6px;
+  background-color: #381800;
+}
+
+h2 {
+  color: #FFAB6D;
+}

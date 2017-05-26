@@ -1,7 +1,10 @@
 <div class="container">
+  <div class="pull-right mainTitle">
+    <h2>Scrape the Onion!</h2>
+  </div>
   <button class="scrape btn btn-danger">Get New Articles!</button>
   <button class="savedArticles btn btn-success">See Saved Articles!</button>
-  <br><br>
+  <br><br><BR><BR><BR>
   {{#each articles}}
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -31,6 +34,9 @@
       </div>
       <div class="modal-body">
         <h4 class="text-center body"></h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

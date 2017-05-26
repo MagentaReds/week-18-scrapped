@@ -1,4 +1,10 @@
 <div class="container">
+  <div class="pull-right mainTitle">
+    <h2>Scrape the Onion!</h2>
+  </div>
+  <button class="goHome btn btn-success">Go Home!</button>
+  
+  <br><br>
   {{#each results}}
     <div class="panel panel-default" id="{{this._id}}">
       <div class="panel-heading">
@@ -11,7 +17,7 @@
           </div>
           <div class="col-md-3 text-center">
             <button class="seeNotes btn btn-success" data-id="{{this._id}}">See notes</button>
-            <button class="unsave btn btn-Danger" data-id="{{this._id}}">Unsave</button>
+            <button class="unsave btn btn-danger" data-id="{{this._id}}">Unsave</button>
           </div>
         </div>
       </div>
@@ -31,6 +37,38 @@
       </div>
       <div class="modal-body">
         <h4 class="text-center body"></h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<!-- Notes Modal -->
+<div class="modal fade" id="notesModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h2 class="modal-title text-center">Notes for: <span class="article-title"></span></h2>
+      </div>
+      <div class="modal-body">
+        <div class="note-container">
+ 
+          
+          
+        </div>
+        <div>
+          <br>
+          <h4 class="text-center body">Enter in new note:</h4>
+          <textarea class="note-input" placeholder="New note starts here"></textarea>
+      </div>
+      <br>
+      <div class="modal-footer">
+        <button class="btn btn-success save-note" data-id-savedArticle="">Save Note</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

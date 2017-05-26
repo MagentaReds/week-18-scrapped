@@ -44,10 +44,58 @@ router.delete("/saveArticle", function(req, res){
   var _id= req.body.id;
   SavedArticle.remove({_id: _id}, function(err, result){
     if(err){
-      res.json({err: true, msg: "thing failed"});
+      res.json({err: true, msg: "Thing failed :("});
     } else {
       res.json({success: true});
     }
+  });
+});
+
+router.get("/notes/:id", function(req, res){
+  var id=req.params.id;
+  SavedArticle.findById(id)
+    .populate("notes")
+    .exec(function(err, result){
+      if(err)
+        res.json({err:true, msg:"Thing failed :("});
+      else
+        res.json(result.notes);
+    });
+});
+
+router.post("/notes", function(req, res){
+  var newDoc = {body: req.body.body.trim()};
+  var newNote = new Note(newDoc);
+  newNote.save(function(err,note){
+    if(err)
+      res.json({err:true, msg:"Thing failed :("});
+    else {
+      SavedArticle.findByIdAndUpdate(
+        req.body.savedArticleId, 
+        {$push: {"notes": note._id}},
+        {new: true},
+        function(err, savedArticle){
+          if(err)
+            res.json({err:true, msg:"Thing failed :("});
+          else
+            res.json({success: true, noteBody: note.body, noteId: note._id, savedArticleId: savedArticle._id});
+        });
+      
+    }
+  });
+
+});
+
+
+router.delete("/notes", function(req, res){
+  var noteId= req.body.noteId;
+  var savedArticleId = req.body.savedArtictleId;
+  Note.remove({_id: noteId}, function(err, result){
+    if(err)
+      console.log(err);
+    SavedArticle.findByIdAndUpdate(savedArticleId, {$pull: {notes: noteId}}, function(err, result){
+      res.sendStatus(204);
+    });
   });
 });
 
