@@ -79,7 +79,7 @@ $(document).ready(function(){
             </div>
           </div>
           -->*/
-  //help function to displaying notes
+  //help function for building HTML for each note, and then adding it to the DOM
   function insertNote(body, noteId, savedArticleId){
     var panel = $("<div>");
     panel.addClass("panel panel-default");
@@ -108,7 +108,7 @@ $(document).ready(function(){
     $(".note-container").append(panel);
   }
 
-  //button that displayus the notes modal on the saved article page
+  //button that displays the notes modal on the saved article page
   $(".seeNotes").on("click", function(event){
     var savedArticleId=$(this).attr("data-id");
     var modal = $("#notesModal");
